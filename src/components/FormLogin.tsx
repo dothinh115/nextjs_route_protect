@@ -28,7 +28,8 @@ export default function FormLogin() {
     });
     //validation
     let error = "";
-    if (!inputData.match(emailPattern)) error = "Email phải đúng định dạng!";
+    if (!inputData.match(emailPattern) && key === "email")
+      error = "Email phải đúng định dạng!";
     if (inputData === "") error = "Không được để trống!";
     changeFormError({
       ...formError,
@@ -38,6 +39,13 @@ export default function FormLogin() {
 
   const handleSubmitLogin = async (event: React.FormEvent) => {
     event.preventDefault();
+    for (const key in formError) {
+      if (
+        formError[key as keyof ILogin] !== "" ||
+        formLogin[key as keyof ILogin] === ""
+      )
+        return;
+    }
     try {
       await login(formLogin);
       window.location.reload();
@@ -56,19 +64,33 @@ export default function FormLogin() {
             <h2 className="text-[14px]">Email</h2>
             <input
               type="text"
-              className="p-2 border border-slate-400 rounded-[6px] w-full outline-none"
+              className={`p-2 border border-slate-400 rounded-[6px] w-full outline-none ${
+                formError.email ? "border-red-500" : ""
+              } `}
               data-id="email"
               onChange={handleInputChange}
             />
+            {formError.email && (
+              <div className="text-[12px] font-light text-red-500">
+                {formError.email}
+              </div>
+            )}
           </div>
           <div className="space-y-2">
             <h2 className="text-[14px]">Mật khẩu</h2>
             <input
               type="password"
-              className="p-2 border border-slate-400 rounded-[6px] w-full outline-none"
+              className={`p-2 border border-slate-400 rounded-[6px] w-full outline-none ${
+                formError.password ? "border-red-500" : ""
+              } `}
               data-id="password"
               onChange={handleInputChange}
             />
+            {formError.password && (
+              <div className="text-[12px] font-light text-red-500">
+                {formError.password}
+              </div>
+            )}
           </div>
 
           <div className="flex justify-end">
