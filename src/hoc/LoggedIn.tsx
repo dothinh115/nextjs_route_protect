@@ -1,10 +1,10 @@
-import UseAuth from "@/hooks/useAuth";
+import { getAuth } from "@/customHooks/getAuth";
 import { redirect } from "next/navigation";
 
-const LoggedIn = (Component: JSX.ElementType) => async (props: any) => {
-  const { user } = await UseAuth();
+const LoggedIn = (Component: React.FC) => async (props: any) => {
+  const { user } = await getAuth();
   if (user) return redirect("/dashboard");
-  return <Component user={user} />;
+  return <Component />;
 };
 
 export default LoggedIn;

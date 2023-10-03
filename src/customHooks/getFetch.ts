@@ -1,6 +1,6 @@
 import { API_URL } from "@/utils/variables";
 import { getCookie } from "cookies-next";
-export default async function useFetch(url: string, options?: RequestInit) {
+export const getFetch = async (url: string, options?: RequestInit) => {
   const token = getCookie("access_token");
   const isServer = typeof window === "undefined";
 
@@ -19,4 +19,4 @@ export default async function useFetch(url: string, options?: RequestInit) {
   const response = await fetch(url, options);
   const data = await response.json();
   return { data };
-}
+};

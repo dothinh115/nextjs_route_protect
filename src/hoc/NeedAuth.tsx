@@ -1,10 +1,10 @@
-import UseAuth from "@/hooks/useAuth";
+import { getAuth } from "@/customHooks/getAuth";
 import { redirect } from "next/navigation";
 
-const NeedAuth = (Component: any) => async (props: any) => {
-  const { user } = await UseAuth();
+const NeedAuth = (Component: React.FC) => async (props: any) => {
+  const { user } = await getAuth();
   if (!user) return redirect("/");
-  return <Component user={user} />;
+  return <Component />;
 };
 
 export default NeedAuth;
