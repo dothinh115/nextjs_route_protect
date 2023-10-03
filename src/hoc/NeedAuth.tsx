@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { redirect } from "next/navigation";
 
 const NeedAuth = (Component: any) => async (props: any) => {

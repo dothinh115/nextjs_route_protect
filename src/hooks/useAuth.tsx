@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import { useFetch } from "./useFetch";
-export async function useAuth() {
+import useFetch from "./useFetch";
+export default async function useAuth() {
   const cookie = cookies();
   const token = cookie.get("access_token");
   const getProfile = async () => {
