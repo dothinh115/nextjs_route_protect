@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import useFetch from "@/hooks/useFetch";
 import { setCookie } from "cookies-next";
+import { useFetch } from "@/hooks/useFetch";
 
 export interface ILogin {
   email: string;

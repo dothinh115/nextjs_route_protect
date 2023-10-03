@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderMenu from "./HeaderMenu";
-import useAuth from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 type Props = {};
 
 const Header = async (props: Props) => {
