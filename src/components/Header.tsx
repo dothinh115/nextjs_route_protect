@@ -1,12 +1,10 @@
 import React from "react";
 import HeaderMenu from "./HeaderMenu";
-import { cookies } from "next/headers";
-import { getProfile } from "@/utils/auth";
+import useAuth from "@/hooks/useAuth";
 type Props = {};
 
 const Header = async (props: Props) => {
-  const cookie = cookies();
-  const user = await getProfile(cookie);
+  const { user } = await useAuth();
   return (
     <>
       <div className="px-6 pt-4 text-black">

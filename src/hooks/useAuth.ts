@@ -1,0 +1,21 @@
+import { cookies } from "next/headers";
+import useFetch from "./useFetch";
+const useAuth = async () => {
+  const cookie = cookies();
+  const token = cookie.get("access_token");
+  const getProfile = async () => {
+    if (token?.value) {
+      const { data } = await useFetch("/api/users/profile", {
+        headers: {
+          authorization: "Bearer " + token.value,
+        },
+      });
+      if (data.result) return data.result;
+    }
+    return null;
+  };
+  const user = await getProfile();
+  return { user, token };
+};
+
+export default useAuth;

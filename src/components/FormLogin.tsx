@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { login } from "@/utils/auth";
+import useFetch from "@/hooks/useFetch";
+import { setCookie } from "cookies-next";
 
 export interface ILogin {
   email: string;
@@ -47,8 +48,20 @@ export default function FormLogin() {
         return;
     }
     try {
-      await login(formLogin);
-      window.location.reload();
+      const params = {
+        method: "POST",
+        body: JSON.stringify(formLogin),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await useFetch("/api/signIn", params);
+      if (data.result) {
+        const { accessToken } = data.result;
+        if (accessToken) setCookie("access_token", accessToken);
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
