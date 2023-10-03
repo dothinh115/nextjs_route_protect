@@ -9,6 +9,9 @@ const useAuth = async () => {
         headers: {
           authorization: "Bearer " + token.value,
         },
+        next: {
+          revalidate: 3600,
+        },
       });
       if (data.result) return data.result;
     }
