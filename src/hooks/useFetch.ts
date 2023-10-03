@@ -2,7 +2,9 @@ import { API_URL } from "@/utils/variables";
 import { getCookie } from "cookies-next";
 const useFetch = async (url: string, options?: RequestInit) => {
   const token = getCookie("access_token");
-  if (process.browser)
+  const isServer = typeof window === "undefined";
+
+  if (!isServer)
     options = {
       ...options,
       headers: {
