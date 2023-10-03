@@ -55,7 +55,7 @@ export default function FormLogin() {
       const { data } = await useFetch("/api/signIn", params);
       if (data.result) {
         const { accessToken } = data.result;
-        if (accessToken) await setCookie("access_token", accessToken);
+        if (accessToken) setCookie("access_token", accessToken);
         window.location.reload();
       }
     } catch (error) {
