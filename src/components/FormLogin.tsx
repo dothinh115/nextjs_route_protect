@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { setCookie } from "cookies-next";
-import useFetch from "@/hooks/useFetch";
+import UseFetch from "@/hooks/useFetch";
 
 export interface ILogin {
   email: string;
@@ -52,7 +52,7 @@ export default function FormLogin() {
         method: "POST",
         body: JSON.stringify(formLogin),
       };
-      const { data } = await useFetch("/api/signIn", params);
+      const { data } = await UseFetch("/api/signIn", params);
       if (data.result) {
         const { accessToken } = data.result;
         if (accessToken) setCookie("access_token", accessToken);

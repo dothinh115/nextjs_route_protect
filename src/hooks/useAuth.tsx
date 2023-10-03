@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
-import useFetch from "./useFetch";
+import UseFetch from "./useFetch";
 export default async function useAuth() {
   const cookie = cookies();
   const token = cookie.get("access_token");
   const getProfile = async () => {
     if (token?.value) {
-      const { data } = await useFetch("/api/users/profile", {
+      const { data } = await UseFetch("/api/users/profile", {
         headers: {
           authorization: "Bearer " + token.value,
         },
