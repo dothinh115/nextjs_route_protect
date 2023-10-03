@@ -1,10 +1,10 @@
 import React from "react";
 import HeaderMenu from "./HeaderMenu";
-import { getAuth } from "@/customHooks/getAuth";
+import { handleAuth } from "@/handle/handleAuth";
 type Props = {};
 
 const Header = async (props: Props) => {
-  const { user } = await getAuth();
+  const { user } = await handleAuth();
   return (
     <>
       <div className="px-6 pt-4 text-black">
