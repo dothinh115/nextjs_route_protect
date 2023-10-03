@@ -51,15 +51,11 @@ export default function FormLogin() {
       const params = {
         method: "POST",
         body: JSON.stringify(formLogin),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
       };
       const { data } = await useFetch("/api/signIn", params);
       if (data.result) {
         const { accessToken } = data.result;
-        if (accessToken) setCookie("access_token", accessToken);
+        if (accessToken) await setCookie("access_token", accessToken);
         window.location.reload();
       }
     } catch (error) {
