@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { useFetch } from "./useFetch";
-export const useAuth = async () => {
+export async function useAuth() {
   const cookie = cookies();
   const token = cookie.get("access_token");
   const getProfile = async () => {
@@ -19,4 +19,4 @@ export const useAuth = async () => {
   };
   const user = await getProfile();
   return { user, token };
-};
+}
